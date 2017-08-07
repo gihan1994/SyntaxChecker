@@ -52,8 +52,7 @@ public class SyntaxChecker {
 
 		for (int index = 0; index < pattern.size(); index++) {
 			if (symbles.get(pattern.get(index)) != null) {
-				System.out.println(pattern.get(index));
-				System.out.println(pattern.get(index+1));
+				
 				if(pattern.get(index+1).contains(symbles.get(pattern.get(index)))){
 					System.out.println("line done");
 					
