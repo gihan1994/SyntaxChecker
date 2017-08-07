@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 
 import java.io.FileReader;
-
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,23 +12,18 @@ public class SyntaxChecker {
 	public static void main(String[] args) {
 
 
-		try {
-			
-			BufferedReader br = new BufferedReader(new FileReader("src/Sample.txt"));
-			int lineNo = 1;
-			while (br.readLine() != null) {
-				
-				String text=br.readLine();
-				if(text!=null){lineChecker(text, lineNo);}
-				
-				lineNo++;
-			
-			}
-			br.close();
-
+		try (FileReader file = new FileReader("src/Sample.txt");
+		        BufferedReader buffer = new BufferedReader(file)) {
+		  
+		    String line;
+		    int lineNo=1;
+		    while ((line = buffer.readLine()) != null) {
+		       lineChecker(line,lineNo);
+		    lineNo++;
+		    }
+		    
 		} catch (Exception e) {
-
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 
 	}
@@ -57,8 +52,12 @@ public class SyntaxChecker {
 
 		for (int index = 0; index < pattern.size(); index++) {
 			if (symbles.get(pattern.get(index)) != null) {
-
-				if (pattern.get(pattern.size() - (index + 1)).contains(symbles.get(pattern.get(index)))) {
+				System.out.println(pattern.get(index));
+				System.out.println(pattern.get(index+1));
+				if(pattern.get(index+1).contains(symbles.get(pattern.get(index)))){
+					System.out.println("line done");
+					
+				}else if (pattern.get(pattern.size() - (index + 1)).contains(symbles.get(pattern.get(index)))) {
 					System.out.println("line done");
 
 				} else {
